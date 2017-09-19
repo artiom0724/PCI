@@ -22,18 +22,12 @@ namespace PCI
             }
             catch (ManagementException ex)
             {
-                Console.WriteLine(ex);
-                throw;
+                Console.WriteLine(ex.Message);
             }
             catch (FileNotFoundException ex)
             {
                 PCIListBox.Items.Add(ex.Message);
             }
-        }
-
-        private void PCIListBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
     }
 }

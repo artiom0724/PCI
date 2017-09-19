@@ -39,7 +39,6 @@
             this.PCIListBox.Name = "PCIListBox";
             this.PCIListBox.Size = new System.Drawing.Size(1007, 326);
             this.PCIListBox.TabIndex = 0;
-            this.PCIListBox.SelectedIndexChanged += new System.EventHandler(this.PCIListBox_SelectedIndexChanged);
             // 
             // PCISearcher
             // 

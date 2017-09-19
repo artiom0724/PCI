@@ -4,8 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Management;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PCI
@@ -14,14 +16,27 @@ namespace PCI
     {
         public string[] GetDataBase()
         {
-            var webClient = new WebClient();
-            string returnString;
-            using (webClient)
+            try
             {
-                returnString = webClient.DownloadString("http://pci-ids.ucw.cz/v2.2/pci.ids");
+                Ping ping = new Ping();
+                PingReply pingReply = ping.Send("google.com");
+
+                if (pingReply.Status == IPStatus.Success)
+                {
+                    var webClient = new WebClient();
+                    string returnString;
+                    using (webClient)
+                    {
+                        returnString = webClient.DownloadString("http://pci-ids.ucw.cz/v2.2/pci.ids");
+                    }
+                    return returnString.Split('\n');
+                }
             }
-            return returnString.Split('\n');
+            catch (PingException)
+            {}
+            return File.ReadLines("pci.ids").ToArray();
         }
+
 
         public List<List<string>> GetDevices()
         {
@@ -52,6 +67,7 @@ namespace PCI
             var deviceFound = false;
             var vendor = new Regex("^" + ven + "  ");
             var device = new Regex("^\\t" + dev + "  ");
+
             foreach (var item in PCIids)
             {
                 if (item != null)
@@ -69,6 +85,7 @@ namespace PCI
                     }
                 }
             }
+
             if (!vendorFound)
             {
                 result.Add("Device with VendorID " + ven + " and DeviceID " + dev + "wasn't found in base");
