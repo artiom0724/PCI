@@ -37,7 +37,7 @@
             this.PCIListBox.FormattingEnabled = true;
             this.PCIListBox.Location = new System.Drawing.Point(0, 0);
             this.PCIListBox.Name = "PCIListBox";
-            this.PCIListBox.Size = new System.Drawing.Size(676, 463);
+            this.PCIListBox.Size = new System.Drawing.Size(1007, 326);
             this.PCIListBox.TabIndex = 0;
             this.PCIListBox.SelectedIndexChanged += new System.EventHandler(this.PCIListBox_SelectedIndexChanged);
             // 
@@ -45,7 +45,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(676, 463);
+            this.ClientSize = new System.Drawing.Size(1007, 326);
             this.Controls.Add(this.PCIListBox);
             this.Name = "PCISearcher";
             this.Text = "PCISearcher";

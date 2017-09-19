@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Management;
 using System.Windows.Forms;
 
 namespace PCI
@@ -18,6 +19,11 @@ namespace PCI
             {
                 foreach (var dev in provider.GetDevices())
                     PCIListBox.Items.Add(dev[0].PadRight(100 - dev[0].Length) + "\t\t\t" + dev[1]);
+            }
+            catch (ManagementException ex)
+            {
+                Console.WriteLine(ex);
+                throw;
             }
             catch (FileNotFoundException ex)
             {
